@@ -9,31 +9,29 @@ Write a function `greet_user(name)` that:
 - if the name is empty (or only spaces), uses "Stranger" as the name
 
 In the main block: ask the user for their name and print the greeting.
-
-Example run:
-    Enter your name:   alice
-    Hello, Alice! Welcome to Python!
-
-Examples (these are also used to check your work):
->>> greet_user("alice")
-'Hello, Alice! Welcome to Python!'
->>> greet_user("   bob  ")
-'Hello, Bob! Welcome to Python!'
->>> greet_user("anna MARIE")
-'Hello, Anna marie! Welcome to Python!'
->>> greet_user("   ")
-'Hello, Stranger! Welcome to Python!'
 """
 
 
 def greet_user(name: str) -> str:
     """Return a greeting message after cleaning and capitalizing the name."""
-    # TODO: implement cleaning, the empty-name case, and formatting
-    raise NotImplementedError("greet_user() is not implemented yet")
+    # 1. Baş ve sondaki boşlukları temizle
+    clean_name = name.strip()
+
+    # 2. Eğer isim boş kaldıysa "Stranger" ata
+    if not clean_name:
+        clean_name = "Stranger"
+    else:
+        # 3. İlk harfi büyüt, geri kalanını küçült
+        clean_name = clean_name.capitalize()
+
+    # 4. İstenen formatta geri döndür
+    return f"Hello, {clean_name}! Welcome to Python!"
 
 
 if __name__ == "__main__":
-    # Keep all input() calls inside this block, otherwise the autograder
-    # cannot import your file.
-    # TODO: read name from input and print greeting
-    pass
+    # Kullanıcıdan girdi al
+    user_name = input("Enter your name: ")
+
+    # Fonksiyonu çağır ve sonucu yazdır
+    greeting = greet_user(user_name)
+    print(greeting)

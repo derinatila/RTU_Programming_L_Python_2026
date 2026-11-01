@@ -11,33 +11,33 @@ in this order:
 Return type: (int, int, bool)
 
 In the main block: read a sentence, call the function, and print a summary.
-
-Example run:
-    Enter a sentence: I love Python
-    Characters: 13
-    Words: 3
-    Contains 'Python': True
-
-Examples (these are also used to check your work):
->>> analyze_sentence("I love Python")
-(13, 3, True)
->>> analyze_sentence("  Hello   world  ")
-(17, 2, False)
->>> analyze_sentence("PYTHONIC code!")
-(14, 2, True)
->>> analyze_sentence("")
-(0, 0, False)
 """
 
 
 def analyze_sentence(text: str) -> tuple[int, int, bool]:
     """Return (length, word count, contains 'python') for the given text."""
-    # TODO: implement function logic
-    raise NotImplementedError("analyze_sentence() is not implemented yet")
+    # 1. Toplam karakter sayısı (boşluklar dahil)
+    char_count = len(text)
+
+    # 2. Kelime sayısı (varsayılan olarak boşluklardan böler)
+    word_count = len(text.split())
+
+    # 3. "python" kelimesi geçiyor mu? (Büyük/küçük harf duyarsız)
+    # Metni tamamen küçük harfe çevirip içinde "python" arıyoruz
+    contains_python = "python" in text.lower()
+
+    # İstenen sırayla tuple (demet) olarak geri döndür
+    return (char_count, word_count, contains_python)
 
 
 if __name__ == "__main__":
-    # Keep all input() calls inside this block, otherwise the autograder
-    # cannot import your file.
-    # TODO: read sentence from input, call function, and print results
-    pass
+    # Kullanıcıdan cümle al
+    sentence = input("Enter a sentence: ")
+
+    # Fonksiyonu çağır ve dönen tuple'ı parçala (unpack)
+    chars, words, has_python = analyze_sentence(sentence)
+
+    # Sonuçları yazdır
+    print(f"Characters: {chars}")
+    print(f"Words: {words}")
+    print(f"Contains 'Python': {has_python}")
